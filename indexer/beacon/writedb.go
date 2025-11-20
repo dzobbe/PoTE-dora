@@ -287,6 +287,8 @@ func (dbw *dbWriter) buildDbBlock(block *Block, epochStats *EpochStats, override
 		BLSChangeCount:        uint64(len(blsToExecChanges)),
 		BlobCount:             uint64(len(blobKzgCommitments)),
 		RecvDelay:             block.recvDelay,
+		ProposerTEEType:       block.header.Message.ProposerTEEType,
+		ProposerTEEQuote:      block.header.Message.ProposerTEEQuote[:],
 	}
 
 	blockSize, err := getBlockSize(block.dynSsz, blockBody)

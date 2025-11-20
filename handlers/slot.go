@@ -333,6 +333,8 @@ func getSlotPageBlockData(blockData *services.CombinedBlockResponse, epochStatsV
 		DepositsCount:          uint64(len(deposits)),
 		VoluntaryExitsCount:    uint64(len(voluntaryExits)),
 		SlashingsCount:         uint64(len(proposerSlashings)) + uint64(len(attesterSlashings)),
+		ProposerTEEType:        blockData.Header.Message.ProposerTEEType,
+		ProposerTEEQuote:       blockData.Header.Message.ProposerTEEQuote[:],
 	}
 
 	pageData.SpecValues["max_committees_per_slot"] = specs.MaxCommitteesPerSlot

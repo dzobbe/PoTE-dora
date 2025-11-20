@@ -47,6 +47,8 @@ type APISlotData struct {
 	VoluntaryExitsCount        uint64  `json:"voluntaryexitscount"`
 	WithdrawalCount            uint64  `json:"withdrawalcount"`
 	BlobCount                  uint64  `json:"blob_count"`
+	ProposerTEEType            uint8   `json:"proposer_tee_type,omitempty"`
+	ProposerTEEQuote           string  `json:"proposer_tee_quote,omitempty"`
 }
 
 // APISlotV1 returns information about a specific slot by slot number or block root
@@ -187,6 +189,14 @@ func APISlotV1(w http.ResponseWriter, r *http.Request) {
 	data.ExecGasLimit = dbSlot.EthGasLimit
 	data.ExecGasUsed = dbSlot.EthGasUsed
 	data.ExecBaseFeePerGas = dbSlot.EthBaseFee
+
+	// Add TEE fields if present
+	if dbSlot.ProposerTEEType != 0 || len(dbSlot.ProposerTEEQuote) > 0 {
+		data.ProposerTEEType = dbSlot.ProposerTEEType
+		if len(dbSlot.ProposerTEEQuote) > 0 {
+			data.ProposerTEEQuote = fmt.Sprintf("0x%x", dbSlot.ProposerTEEQuote)
+		}
+	}
 
 	response := APISlotResponse{
 		Status: "OK",

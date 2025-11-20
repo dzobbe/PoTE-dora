@@ -68,6 +68,8 @@ type SlotPageBlockData struct {
 	DepositRequestsCount       uint64                 `json:"deposit_receipts_count"`
 	WithdrawalRequestsCount    uint64                 `json:"withdrawal_requests_count"`
 	ConsolidationRequestsCount uint64                 `json:"consolidation_requests_count"`
+	ProposerTEEType            uint8                  `json:"proposer_tee_type,omitempty"`
+	ProposerTEEQuote           []byte                 `json:"proposer_tee_quote,omitempty"`
 
 	ExecutionData         *SlotPageExecutionData          `json:"execution_data"`
 	Attestations          []*SlotPageAttestation          `json:"attestations"`           // Attestations included in this block

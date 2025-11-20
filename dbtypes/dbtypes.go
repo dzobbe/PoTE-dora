@@ -58,6 +58,8 @@ type Slot struct {
 	MinExecTime           uint32     `db:"min_exec_time"`
 	MaxExecTime           uint32     `db:"max_exec_time"`
 	ExecTimes             []byte     `db:"exec_times"`
+	ProposerTEEType       uint8      `db:"proposer_tee_type"`
+	ProposerTEEQuote      []byte     `db:"proposer_tee_quote"`
 }
 
 type Epoch struct {
